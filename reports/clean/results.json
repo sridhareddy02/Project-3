@@ -1,0 +1,11 @@
+{
+  "gate_passed": true,
+  "checks_total": 23,
+  "checks_failed": 0,
+  "incidents": 0,
+  "evaluation": null,
+  "clean_run": {
+    "failing_checks": [],
+    "incidents": 0
+  }
+}

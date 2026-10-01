@@ -1,0 +1,13 @@
+{
+  "gate_passed": false,
+  "checks_total": 23,
+  "checks_failed": 14,
+  "incidents": 2,
+  "evaluation": {
+    "defects_injected": 11,
+    "defects_caught": 11,
+    "recall": 1.0,
+    "unexpected_failures": []
+  },
+  "clean_run": null
+}

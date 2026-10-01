@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mktg-pipeline"
+version = "1.0.0"
+description = "Marketing data pipeline with a SQL warehouse, data-quality gates, reconciliation and anomaly detection."
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "pandas>=2.1", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+mktg-pipeline = "mktg_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

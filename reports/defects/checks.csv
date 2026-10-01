@@ -1,0 +1,24 @@
+id,name,category,severity,status,failing_rows,description,detail
+C01,web_sessions has every day,completeness,error,fail,3,Every date in the reporting window has web analytics rows,"days with no web data: 2025-05-05, 2025-05-06, 2025-05-07"
+C02,ads has every paid channel-day,completeness,error,pass,0,Each paid channel reports spend for every day,
+C03,data is fresh,freshness,warn,pass,0,Latest web data is at most one day older than the window end,
+C04,lead_id is unique,uniqueness,error,fail,60,No lead id appears twice in the CRM export,repeated lead_id rows
+C05,one lead per email,uniqueness,warn,fail,40,No normalised email is attached to several lead ids,"emails with several lead ids: lead109@example.com, lead12793@example.com, lead16070@example.com, lead16087@example.com, lead18213@example.com (+35 more)"
+C06,order_id is unique,uniqueness,error,pass,0,No order id appears twice,
+C07,leads have an email,not null,warn,fail,80,Every lead has an email address,leads without an email address
+C08,ads have a campaign name,not null,error,fail,15,Every ad row names its campaign,ad rows with no campaign name
+C09,lead status is known,accepted values,error,fail,25,Every lead status maps to the standard list,unmapped statuses: ??
+C10,web traffic sources are known,accepted values,error,fail,6,Every source / medium maps to a channel,unknown web sources: tiktok / paid_social
+C11,orders and leads map to a channel,accepted values,error,pass,0,No order or lead has an unknown channel,
+C12,order revenue is positive,range,error,fail,5,Every order has revenue above zero,orders with missing or non-positive revenue
+C13,no orders from the future,range,error,fail,3,No order is dated after the extract date,orders dated after the extract date 2025-07-01
+C14,ad metrics are sane,range,error,pass,0,No negative metrics and clicks never exceed impressions,
+C15,web transactions match orders,reconciliation,error,fail,4,Daily web transactions and orders agree within 5% (minimum 2),"channel-days where web transactions and orders disagree: 2025-03-10 paid_search, 2025-03-11 paid_search, 2025-03-12 paid_search, 2025-03-13 paid_search"
+C16,web revenue matches orders,reconciliation,warn,fail,1,Revenue in web analytics and in the order system agree within 2% per channel,channels whose web revenue differs from order revenue by more than 2%: paid_search (2.2%)
+C17,sessions track ad clicks,reconciliation,warn,pass,0,Paid sessions are between 75% and 105% of platform clicks,
+C18,dashboard matches the warehouse,reconciliation,error,fail,5,Dashboard revenue agrees with the warehouse within 0.5% per channel,"channels where dashboard revenue differs from the warehouse by more than 0.5%: direct (dashboard 10,949,595 vs warehouse 822,520), email (dashboard 93,483,616 vs warehouse 1,762,017), organic_search (dashboard 36,897,470 vs warehouse 617,381), paid_search (dashboard 109,572,807 vs warehouse 1,136,394), paid_social (dashboard 53,926,969 vs warehouse 453,620)"
+C19,values parse,validity,error,pass,0,No unparseable dates or numbers in any source,
+C20,no spend anomalies,anomaly,error,fail,1,Daily spend stays within the weekday-adjusted band,"incidents: paid_social 2025-04-17 (spike, 1 day)"
+C21,no conversion anomalies,anomaly,error,fail,1,Daily transactions and conversion rate stay within the weekday-adjusted band,"incidents: paid_search 2025-03-10 (drop, 4 days)"
+C22,no session anomalies,anomaly,warn,pass,0,Daily sessions stay within the weekday-adjusted band,
+C23,no rows lost on load,lineage,error,pass,0,Every raw row reaches staging,
